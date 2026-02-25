@@ -3,8 +3,8 @@ import pickle
 import pandas as pd
 
 
-similarity_matrix = pickle.load(open("Building ML model/similarity.pkl","rb"))
-new_df = pd.read_csv("Building ML model/api_dataframe.csv")
+similarity_matrix = pickle.load(open("main/similarity.pkl","rb"))
+new_df = pd.read_csv("main/api_dataframe.csv")
 
 
 app = FastAPI()
