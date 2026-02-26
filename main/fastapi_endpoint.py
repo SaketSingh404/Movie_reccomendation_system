@@ -10,7 +10,7 @@ new_df = pd.read_csv("main/api_dataframe.csv")
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allows all origins
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
