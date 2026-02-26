@@ -1,89 +1,149 @@
 # 🎬 Movie Recommendation System
 
-A full-stack machine learning application that suggests movies based on content similarity. This project utilizes Natural Language Processing (NLP) to analyze movie metadata and a high-performance FastAPI backend to serve recommendations to a sleek, responsive frontend.
+A content-based Movie Recommendation System built using **FastAPI** and NLP techniques.
+Select a movie and get similar movie recommendations instantly.
 
 ---
 
-## 📌 Project Overview
+## Features
 
-This system helps users discover new movies by finding films with similar themes, genres, and storylines. 
-
-1.  **Data:** 10,000+ movies fetched from the **TMDB API**.
-2.  **Engine:** Content-based filtering using **TF-IDF Vectorization** and **Cosine Similarity**.
-3.  **Backend:** A RESTful API built with **FastAPI**.
-4.  **Frontend:** A clean user interface built with **HTML, CSS, and Vanilla JavaScript**.
+- 🔎 Searchable dropdown with 7500+ movies
+- 🎯 Content-based recommendation system
+- 🧠 NLP preprocessing (stopword removal, stemming)
+- 📊 Tf-Idf embeddings for similarity calculation
+- ⚡ FastAPI backend
+- 🖼️ Movie posters included in Fast API response
+- 🌐 Frontend integration using Vanilla JavaScript
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technologies Used |
-| :--- | :--- |
-| **Frontend** | HTML5, CSS3, JavaScript (Fetch API) |
-| **Backend** | Python, FastAPI, Uvicorn |
-| **ML/NLP** | Pandas, Scikit-learn (TfidfVectorizer), NLTK |
-| **Data Source** | TMDB API |
+### Backend
+- Python
+- FastAPI
+- Pandas
+- NumPy
+- Requests
+- Scikit-learn
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- JSON
 
 ---
 
-## ⚙️ How It Works
+## 🧠 How It Works
 
+1. Movie metadata is cleaned and preprocessed:
+   - Lowercasing
+   - Punctuation removal
+   - Stopword removal
 
+2. Word embeddings are generated using Tf-Idf Vectorizer.
 
-### 1. Data & NLP Pipeline
-* **Feature Engineering:** Combined movie overviews, genres, and keywords into a single "tags" column.
-* **Preprocessing:** Applied lowercase conversion, removed stop words, and performed stemming to normalize the text.
-* **Vectorization:** Transformed text tags into numerical vectors using **TF-IDF**, which weights unique words more heavily to find distinct similarities.
+3. Cosine similarity is computed between movie vectors.
 
-### 2. Similarity Logic
-* Calculated the **Cosine Similarity** between all 10,000 movie vectors to create a similarity matrix.
-* When a user selects a movie, the system sorts the matrix to find the top 15 most mathematically similar films.
-
-### 3. API & UI
-* The **FastAPI** endpoint receives a movie title, runs the recommendation function, and returns a JSON response.
-* The **Frontend** uses the JavaScript `fetch()` API to display these results dynamically without a page reload.
-
+4. When a movie is selected:
+   - Its `index` is sent to `http://127.0.0.1:8000/recommend/{index}`
+   - The API returns top N similar movies including:
+     - title
+     - poster URL
 ---
 
-## 🚀 Getting Started
+## ⚙️ Installation & Setup
 
-### Prerequisites
-* Python 3.8+
-* A modern web browser
+### 1️⃣ Clone the repository
 
-### Installation & Setup
+```bash
+git clone https://github.com/SaketSingh404/Movie_reccomendation_system.git
+cd Movie_reccomendation_system
+```
 
-1. **Clone the repo:**
-   ```bash
-   git clone [https://github.com/](https://github.com/)[YOUR_GITHUB_USERNAME]/[YOUR_REPO_NAME].git
-   cd [YOUR_REPO_NAME]
-   Install dependencies:
+### 2️⃣ Create virtual environment
 
-Bash
+```bash
+python -m venv .venv
+```
+
+### 3️⃣ Activate virtual environment
+
+**Windows**
+```bash
+.venv\Scripts\activate
+```
+
+**Mac/Linux**
+```bash
+source .venv/bin/activate
+```
+
+### 4️⃣ Install dependencies
+
+```bash
 pip install -r requirements.txt
-Run the Backend:
+```
 
-Bash
-uvicorn main:app --reload
-The API will be running at http://127.0.0.1:8000
+### 5️⃣ Generate similarity matrix
 
-Launch the Frontend:
-Open index.html in your browser.
+Go to ../Building ML model/Vectorizing Text.ipynb -> Run cells in respective order to generate similarity.pkl
 
-📂 Folder Structure
-Plaintext
-├── data/               # TMDB dataset (CSV)
-├── models/             # Exported similarity matrix & TF-IDF model
-├── main.py             # FastAPI backend logic
-├── index.html          # Frontend UI
-├── style.css           # UI Styling
-├── script.js           # Frontend logic & API calls
-└── requirements.txt    # Python packages
-🌟 Future Scope
-Hybrid Filtering: Adding Collaborative Filtering (user ratings) for better accuracy.
+### 6️⃣ Run FastAPI server
 
-Real-time Posters: Fetching movie posters directly from TMDB for a better UI.
+```bash
+uvicorn main.fastapi_endpoint:app --reload
+```
 
-Cloud Deployment: Hosting the API on Render/Heroku and the UI on Vercel.
+Server runs at:
 
-Developed by [YOUR NAME] LinkedIn | Portfolio
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 📡 API Endpoint
+
+### Get Recommendations
+
+```
+http://127.0.0.1:8000/recommend/{index}
+```
+### API Docs
+
+```
+http://127.0.0.1:8000/docs
+```
+### 7️⃣ Run index.html file
+Run using VS code live server extension
+OR
+Open a new terminal inside the project folder:
+
+```bash
+python -m http.server 5500
+```
+
+Then open in browser:
+
+```
+http://127.0.0.1:5500
+```
+
+---
+
+## 📈 Future Improvements
+
+- We can add collaborative filtering
+- Deployment using Docker
+- Deploy to cloud (AWS / Azure)
+- Improve UI/UX
+
+---
+
+## 👨‍💻 Author
+
+Saket Kumar Singh
+
+---
